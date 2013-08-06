@@ -1,0 +1,23 @@
+$def with (username, picture, description)
+<form id="master_profile" action="" method="post" enctype="multipart/form-data">
+<h3>$username</h3>
+<table>
+<tbody>
+	<tr>
+		<td><label for="picture">头像</label></td>
+		<td>
+            <img id="show_picture" src="$picture" alt="头像" height="48" width="48" />（尺寸不超过80x80，大小不超过10k）<br />
+            <input type="file" id="mypic" name="mypic" accept="image/*" />
+        </td>
+    </tr>
+    <tr>
+        <td><label for="description">简介</label></td>
+        <td><textarea id="description" name="description" rows="6" cols="45" />$description</textarea></td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td><input type="submit" id="save_btn" value="保存" /></td>
+    </tr>
+</tbody>
+</table>
+</form>

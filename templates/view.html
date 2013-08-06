@@ -1,0 +1,31 @@
+$def with (post, comment_lis)
+<div id="view_post">
+<h1>$post['title']</h1>
+<ul id="article_list">
+	<li class="clearfix post_item" id="$post['id']">
+		<div class="user_face" id="first">
+			<a href="/user/$post['user_id']"><img class="pil" src="$post['user_face']" alt="$post['username']"/></a>
+		</div>
+		<div class="content">
+			<div class="head">
+				<span class="username"><a href="/user/$post['user_id']" class="">$post['username']</a></span>
+				<span class="time">$post['time']</span>
+				<span class="reply"><a href="#last">回应</a></span>
+				<span class="floor">楼主</span>
+			</div>
+			<div class="body">
+				$:make_html(post.content)
+			</div>
+		</div>
+	</li>
+$for c_li in comment_lis:
+    $:c_li['li']
+</ul>
+<form id="new_comment" action="" method="post">
+    <input type="hidden" id="quote_id" value="0" />
+    <div class="quote_tip"></div>
+    <textarea id="last" rows="10" cols="90"></textarea><span class="validate_tip"></span><br />
+    <input type="submit" id="submit_btn" value="回帖" />    
+</form>
+</div>
+

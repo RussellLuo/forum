@@ -1,0 +1,31 @@
+$def with (content)
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>$title</title>
+<meta name="robots" content="all,follow" />
+<link rel="stylesheet" href="/static/css/style.css" type="text/css" />
+</head>
+<body>
+    <div id="main">
+        <div id="header">
+            <div id="sitename">
+                <a href="/">$site_name</a>
+            </div>
+            <div id="nav_bar">
+                <ul>
+                $for m in menu:
+                    <li><a href="$m['link']">$m['name']</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="content">
+            $:content
+        </div>
+        <div id="footer">
+            &copy; 2013 - <a href="http://www.cnblogs.com/russellluo/">$author</a>. All rights reserved. | <a href="/about">关于</a>
+        </div>
+    </div>
+<script type="text/javascript" src="/static/js/lib/require.min.js" data-main="/static/js/main.js"></script>
+</body>
+</html>

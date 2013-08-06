@@ -1,0 +1,37 @@
+$def with (username, picture, description, email)
+<form id="account_settings" action="" method="post">
+<table>
+<tbody>
+    <tr>
+        <td><label for="">帐号</label></td>
+        <td><label for="">$username</label></td>
+    </tr>
+    <tr>
+        <td><label for="email">邮箱</label></td>
+        <td><input type="text" id="email" name="email" value="$email" disabled /><a href="" id="modify_email">更改</a><span class="validate_tip"></span></td>
+    </tr>
+    <tr>
+        <td><label for="password">密码</label></td>
+        <td><a href="" id="modify_password">更改</a></td>
+    </tr>
+<!--
+    <tr class="optional">
+        <td><label for="ori_password">原密码</label></td>
+        <td><input type="password" id="ori_password" name="ori_password" /><span class="validate"></span></td>
+    </tr>
+-->
+    <tr class="optional">
+        <td><label for="new_password">新密码</label></td>
+        <td><input type="password" id="new_password" name="new_password" /><span class="validate_tip"></span></td>
+    </tr>
+    <tr class="optional">
+        <td><label for="new_password_again">新密码确认</label></td>
+        <td><input type="password" id="new_password_again" name="new_password_again" /><span class="validate_tip"></span></td>
+    </tr>
+    <tr>
+        <td><input type="submit" id="save_btn" value="保存" /></td>
+        <td><span class="submit_tip"></span></td>
+    </tr>
+</tbody>
+</table>
+</form>

@@ -1,0 +1,427 @@
+/*----- FOR global -----*/
+body {
+    font-size: 16px;
+    background: #eeeeee;
+    width: 100%;
+    margin: 0 auto;
+    color: #444444;
+    line-height: 1.2;
+    min-width: 840px;
+    max-width: 960px;
+    padding: 10px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+}
+
+h1 {
+    color: #000000;
+    font-size: 26px;
+}
+
+h2 {
+    border-bottom: 1px solid #CCCCCC;
+    color: #000000;
+    font-size: 24px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+h4 {
+    font-size: 16px;
+}
+
+h5 {
+    font-size: 14px;
+}
+
+h6 {
+    color: #777777;
+    background-color: inherit;
+    font-size: 14px;
+}
+
+hr {
+    height: 0.2em;
+    border: 0;
+    color: #CCCCCC;
+    background-color: #CCCCCC;
+}
+
+p, blockquote, dl, table, pre {
+    margin: 15px 10px;
+}
+
+code, pre {
+    border-radius: 3px;
+    background-color: #F8F8F8;
+    color: inherit;
+}
+
+code {
+    border: 1px solid #EAEAEA;
+    margin: 0 2px;
+    padding: 0 5px;
+}
+
+pre {
+    border: 1px solid #CCCCCC;
+    line-height: 1.25em;
+    overflow: auto;
+    padding: 6px 10px;
+}
+
+pre > code {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+blockquote {
+    padding: 0 2em;
+    margin-left: 0;
+}
+
+blockquote cite {
+    font-size: 14px;
+    line-height: 20px;
+    color: #bfbfbf;
+}
+
+ul {
+   margin: 0px;
+   padding: 0px;
+}
+
+li {
+    list-style: none;
+}
+
+a, a:visited {
+    color: #37A;
+    text-decoration: none;
+    outline: none;
+}
+
+a:hover {
+    color: #fff;
+    background-color: #37A;
+}
+
+table {
+    /* BEG
+       等效与table元素的cellspacing="0"属性 */
+    border-spacing: 0;
+    border-collapse: collapse;
+    /* END */
+}
+
+table td {
+    padding: 10px 10px 10px 0px;
+}
+
+textarea {
+    /* 取消在Chrome和一些FireFox版本中可能出现的可调属性
+       改为固定大小 */
+    resize: none;
+
+    font-size: 14px;
+}
+
+.validate_tip, .submit_tip.error {
+    color: red;
+}
+
+.submit_tip.ok {
+    color: green;
+}
+
+
+/*----- FOR templates/layout.html -----*/
+div#main {
+    background-color: #fff;
+}
+
+div#header {
+    width: 100%;
+    height: 60px;
+}
+
+div#header #sitename {
+    float: left;
+    width: 100px;
+    height: 40px;
+    padding: 10px;
+}
+
+div#sitename a, div#sitename a:visited {
+    font-size: 35px;
+    height: 40px;
+    line-height: 40px;
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+}
+
+div#sitename a:hover {
+    background-color: #fff;
+}
+
+div#header #nav_bar {
+    float: right;
+    height: 40px;
+    padding-top: 20px;
+    padding-right: 10px;
+}
+
+div#nav_bar li {
+    float: left;
+    list-style: none;
+}
+
+div#nav_bar li a, div#nav_bar li a:visited {
+    font-size: 18px;
+    color: #000;
+    background-color: #eeeeee;
+    display: block;
+    padding: 5px;
+    border-right: 2px solid #888;
+}
+
+div#nav_bar li a:hover {
+    background-color: #aaa;
+}
+
+div#content {
+    min-height: 200px;
+    padding: 10px;
+    border-top: 10px solid #eeeeee;
+}
+
+div#footer {
+    height: 30px;
+    line-height: 30px;
+    padding-left: 10px;
+    border-top: 10px solid #eeeeee;
+}
+
+
+/*----- FOR templates/list.html -----*/
+div#new_post a, div#new_post a:visited {
+    width: 60px;
+    line-height: 30px;
+    height: 30px;
+    text-align: center;
+    color: #fff;
+    background-color: #888;
+    display: block;
+    margin: 10px;
+    border-radius: 6px;  /* 变宽圆角半径 */
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+div#new_post a:hover {
+    background-color: #aaa;
+}
+
+table#post_list {
+    width: 98%;
+    /* BEG
+       表格单元内容超限时，被截断 */
+    table-layout: fixed;
+    white-space: nowrap;
+    overflow: hidden;
+    /* END */
+    margin: 10px;
+    border: 1px solid #888;
+}
+
+table#post_list th {
+    color: #fff;
+    background-color: #888;
+    text-align: left;
+}
+
+/* 表格设置为"table-layout: fixed;"时,
+   将忽略对td的宽度设置，进而每一行会等宽分配，
+   此时为了各列的宽度设置生效，就需要将宽度设置在第一行,
+   这里的第一行即标题th */
+table#post_list th.title {
+    width: 320px;
+    overflow: hidden;
+}
+
+table#post_list th.author {
+    width: 150px;
+}
+
+table#post_list th.reply_count {
+    width: 60px;
+}
+
+table#post_list th.last_reply_time {
+    width: 120px;
+}
+
+table#post_list td {
+    padding: 6px 3px;
+    border-top: 1px solid #888;
+    /*border-top: 1px dashed #888;*/
+    overflow: hidden;
+}
+
+div#post_pager {
+    margin: 10px;
+    text-align: center;
+}
+
+div#post_pager span, div#post_pager a {
+    padding: 0px 5px;
+    margin: 0px 5px;
+}
+
+div#post_pager span {
+    color: #fff;
+    background-color: #37A;
+}
+
+
+/*----- FOR templates/view.html -----*/
+div#view_post {
+    margin: 10px;
+}
+
+div#view_post li {
+    min-height: 60px;
+    padding-bottom: 10px;
+}
+
+/* BEG
+      定义clearfix样式
+      参考http://blog.yam.com/hanasan/article/34569881和
+          http://www.codecto.com/2011/02/css-clearfix-float */
+.clearfix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+
+.clearfix {
+    display: inline-block;
+}
+
+html[xmlns] .clearfix {
+    display: block;
+}
+
+* html .clearfix {
+    height: 1%;
+}
+/* END */
+
+div#view_post div.user_face {
+    float: left;
+    width: 80px;
+    height: 80px;
+    overflow: hidden; 
+    margin-bottom: 10px;
+    margin-right: 20px;
+}
+
+/* 覆盖a:hover的全局属性，这里背景色为白色 */
+div#view_post div.user_face a:hover {
+    background-color: #fff;
+}
+
+div#view_post div.content {
+    float: left;
+    width: 800px;
+}
+
+div#view_post div.head {
+    width: 800px;
+    padding: 5px 0px;
+    border-top: 1px solid #888;
+    border-bottom: 1px solid #888;
+}
+
+div#view_post div.head span {
+    padding: 0px 10px;
+}
+
+div#view_post div.head span.username, div#view_post div.head span.time {
+    border-right: 1px solid #888;
+}
+
+div#view_post div.head span.floor {
+    float: right;
+}
+
+div#view_post div.quote {
+    font-size: 14px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+form#new_comment {
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+form#new_comment .quote_tip {
+    width: 740px;
+    border-radius: 2px;
+    background-color: #ccc;
+}
+
+
+/*----- FOR templates/user_profile.html -----*/
+div#content ul#user_profile li div {
+   width: 350px;
+   padding: 10px;
+   border: 1px solid #eee;
+}
+
+
+/*----- FOR templates/master_profile.html -----*/
+/* none */
+
+
+/*----- FOR templates/account_posts.html -----*/
+table#account_posts {
+    white-space: nowrap;
+}
+
+table#account_posts th {
+    text-align: left;
+    border-bottom: 2px solid #aaa;
+}
+
+table#account_posts th#title {
+    width: 450px;
+}
+
+table#account_posts th#time {
+    width: 200px;
+}
+
+table#account_posts th#del {
+    width: 50px;
+}
+
+table#account_posts td {
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+}
+
+
+/*----- FOR templates/account_settings.html -----*/
+/* none */

@@ -1,0 +1,42 @@
+$def with (page_posts, page_count, page)
+
+$code:
+    grace = 5
+    range = grace * 2
+    start = page - grace if page - grace > 0 else 1
+    end = start + range
+    if end > page_count:
+        end = page_count
+        start = end - range if end - range > 0 else 1
+
+<div id="new_post">
+	<a href="/add">+发帖</a>
+</div>
+<table id="post_list">
+<tbody>
+	<tr>
+		<th class="title">话题</th>
+		<th class="author">作者</th>
+		<th class="reply_count">回应</th>
+		<th class="last_reply_time">最后回应</th>
+	</tr>
+$for p in page_posts:
+	<tr>
+		 <td title="$p['title']"><a href="/view/$p['id']">$trim_utf8(p['title'], 25)</a></td>
+		 <td><a href="/user/$p['userid']">$p['username']</a></td>
+		 <td>$p['comment_count']</td>
+		 <td>$p['last_time']</td>
+	</tr>
+</tbody>
+</table>
+<div id="post_pager">
+$if start > 1:
+    <a class="page" href="/?page=1">1</a> ...
+$for i in xrange(start, end+1):
+    $if i == page:
+        <span class="page">$i</span>
+    $else:
+        <a class="page" href="/?page=$i">$i</a>
+$if end < page_count:
+    ... <a class="page" href="/?page=$page_count">$page_count</a>
+</div>
