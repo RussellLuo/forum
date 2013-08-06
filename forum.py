@@ -59,7 +59,7 @@ class Add:
         if model.User().current_id(): # 用户已登录
             return titled_render('发帖').add()
         else:
-            return titled_render().failed('操作受限，请先登录')
+            return titled_render().failed('操作受限，请先<a href="/login">登录</a>')
 
     def POST(self):
         i = web.input(title='', content='')
@@ -67,7 +67,7 @@ class Add:
         if post_id:
             raise web.seeother("/view/%d" % post_id)
         else:
-            return titled_render().failed('操作受限，请先登录')
+            return titled_render().failed('操作受限，请先<a href="/login">登录</a>')
 
 class Del:
     def GET(self, post_id):
@@ -83,7 +83,7 @@ class Del:
         elif cur_user_id: # 用户已登录，但不是作者
             return titled_render().failed('操作受限，请访问其他页面')
         else: # 用户未登录
-            return titled_render().failed('操作受限，请先登录')
+            return titled_render().failed('操作受限，请先<a href="/login">登录</a>')
 
 class View:
     def GET(self, post_id):
@@ -120,7 +120,7 @@ class Register:
             i = web.input()
             user_id = model.User().new(i.email, i.username, i.password)
         except Exception, e:
-            return titled_render().failed('邮箱或帐号已存在，请重新注册')
+            return titled_render().failed('邮箱或帐号已存在，请重新<a href="/register">注册</a>')
         else:
             if user_id:
                 # 设置cookie
@@ -204,7 +204,7 @@ class Account:
                 raise web.notfound()
 
         # 用户未登录
-        return titled_render().failed('操作受限，请先登录')
+        return titled_render().failed('操作受限，请先<a href="/login">登录</a>')
 
     def POST(self, part):
         # 获取当前登录用户的状态

@@ -37,6 +37,7 @@ class User:
             return False
 
     def login(self, username, password):
+        '''登录验证'''
         pwdhash = hashlib.md5(password).hexdigest()
         users = db.select('users', what='id', where='name=$username AND password=$pwdhash', vars=locals())
         #users = db.where('users', name=username, password=pwdhash)
@@ -47,6 +48,7 @@ class User:
             return 0
 
     def status(self, id):
+        '''查询id对应的用户信息'''
         email = ''
         username = ''
         password_hash = ''
@@ -76,7 +78,7 @@ class User:
             return 0
 
     def current_id(self):
-        '''当前登录用户的user_id'''
+        '''当前登录用户的id'''
         user_id = 0
         try:
             user_id = int(web.cookies().get('user_id'))
@@ -84,7 +86,6 @@ class User:
             print e
         else:
             # 刷新cookie
-            import settings
             web.setcookie('user_id', str(user_id), settings.COOKIE_EXPIRES)
         finally:
             return user_id
@@ -97,6 +98,7 @@ class Post:
             return 0
 
     def view(self, id):
+        '''获取id对应的文章'''
         posts = db.query('''SELECT posts.id, title, content, posts.time, user_id, users.name AS username, users.picture AS user_face
                             FROM posts JOIN users
                             ON posts.user_id = users.id
@@ -114,6 +116,7 @@ class Post:
             print e
 
     def list(self, page):
+        '''获取第page页的所有文章'''
         per_page = settings.POSTS_PER_PAGE
 
         # 获取从offset开始共per_page个post
@@ -139,19 +142,23 @@ class Post:
         return (page_posts, page_count)
 
     def digest_list(self, user_id):
+        '''获取user_id对应作者的文章列表'''
         posts = db.query('''SELECT id, title, time FROM posts
                             WHERE user_id=%d
                             ORDER BY id DESC''' % user_id)
         return posts
 
     def count(self):
+        '''获取文章总数'''
         return db.query("SELECT COUNT(*) AS count FROM posts")[0].count
 
 class Comment:
     def __init__(self, post_id):
+        '''一个Comment实例只对应一篇文章'''
         self.__parent_id = post_id
 
     def quote(self, comments):
+        '''为每个评论获取父评论（即引用，只处理一级）'''
         comments_with_quote = []
         for c in comments:
             quote_content = ''
@@ -187,6 +194,7 @@ class Comment:
             print e
 
     def list(self):
+        '''获取当前文章（创建Comment实例时指定了post_id）下面的所有评论'''
         comments = db.query('''SELECT comments.id, content, comments.time, users.name AS username, user_id, quote_id, users.picture AS user_face
                                FROM comments JOIN users
                                ON comments.user_id = users.id
@@ -195,6 +203,7 @@ class Comment:
         return comments
 
     def last(self):
+        '''获取当前文章下面的最新评论'''
         last_comments = db.query('''SELECT comments.id, content, comments.time, users.name AS username, user_id, quote_id, users.picture AS user_face
                                     FROM comments JOIN users
                                     ON comments.user_id = users.id
@@ -205,4 +214,5 @@ class Comment:
         return None
 
     def count(self):
-         return db.query("SELECT COUNT(*) AS count FROM comments WHERE parent_id=%d" % self.__parent_id)[0].count
+        '''获取当前文章下面的评论总数'''
+        return db.query("SELECT COUNT(*) AS count FROM comments WHERE parent_id=%d" % self.__parent_id)[0].count
