@@ -16,13 +16,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    color: #000000;
     font-size: 26px;
 }
 
 h2 {
-    border-bottom: 1px solid #CCCCCC;
-    color: #000000;
     font-size: 24px;
 }
 
@@ -39,8 +36,6 @@ h5 {
 }
 
 h6 {
-    color: #777777;
-    background-color: inherit;
     font-size: 14px;
 }
 
@@ -91,15 +86,6 @@ blockquote cite {
     color: #bfbfbf;
 }
 
-ul {
-   margin: 0px;
-   padding: 0px;
-}
-
-li {
-    list-style: none;
-}
-
 a, a:visited {
     color: #37A;
     text-decoration: none;
@@ -109,6 +95,10 @@ a, a:visited {
 a:hover {
     color: #fff;
     background-color: #37A;
+}
+
+li {
+    list-style-type: disc;
 }
 
 table {
@@ -177,7 +167,12 @@ div#header #nav_bar {
     padding-right: 10px;
 }
 
-div#nav_bar li {
+div#nav_bar ul {
+   margin: 0px;
+   padding: 0px;
+}
+
+div#nav_bar ul li {
     float: left;
     list-style: none;
 }
@@ -295,7 +290,13 @@ div#view_post {
     margin: 10px;
 }
 
-div#view_post li {
+div#view_post ul#article_list {
+   margin: 0px;
+   padding: 0px;
+}
+
+div#view_post ul#article_list > li {
+    list-style: none;
     min-height: 60px;
     padding-bottom: 10px;
 }
@@ -384,6 +385,15 @@ form#new_comment .quote_tip {
 
 
 /*----- FOR templates/user_profile.html -----*/
+div#content ul#user_profile {
+   margin: 0px;
+   padding: 0px;
+}
+
+div#content ul#user_profile li {
+    list-style: none;
+}
+
 div#content ul#user_profile li div {
    width: 350px;
    padding: 10px;

@@ -7,25 +7,32 @@ function($, validator, common) {
 
     return {
         init: function() {
+            /* 由于使用了cleditor（动态插入了iframe元素）的缘故，对原来的输入合法性验证做了修改 */
+
             var title =
             validator.bind($("form#new_post #title"),
-                           $("form#new_post #title").next(),
+                           $("span#for_title"),
                            function(val) {return true;},
-                           "< 请输入标题",
+                           "^ 请输入标题",
                            "");
 
-            var content =
-            validator.bind($("form#new_post #content"),
-                           $("form#new_post #content").next(),
-                           function(val) {return true;},
-                           "< 请输入内容",
-                           "");
-
+            
             $("form#new_post").submit(function(event) {
-                // 输入有误无法提交
-                if (!(title.valid && content.valid)) {
+                // 输入标题为空，不能提交
+                if (!title.valid) {
                     // stop form from submitting normally
                     event.preventDefault();
+                }
+
+                // 输入内容为空，不能提交
+                if ($("form#new_post #content").val() == "<br>") {
+                    // stop form from submitting normally
+                    event.preventDefault();
+
+                    $("span#for_content").html("^ 请输入内容");
+                }
+                else {
+                    $("span#for_content").html("");
                 }
             });
 
