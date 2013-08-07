@@ -1,0 +1,23 @@
+$def with(post)
+
+<!-- 正如你所见，edit.html与add.html中的HTML元素完全一致，以便edit.html能够共享add.html对应的JS效果 -->
+
+<form id="new_post" action="" method="post">
+<table>
+<tbody>
+    <tr>
+        <td><label for="title">标题</label></td>
+        <td><input type="text" id="title" name="title" value="$post['title']"/><span class="validate_tip"></span></td>
+    </tr>
+    <tr>
+        <td><label for="content">内容</label></td>
+        <td><textarea id="content" name="content" rows="30" cols="70" />$post['content']</textarea><span class="validate_tip"></span></td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td><input type="submit" id="send_btn" value="发帖" /></td>
+        <td><span class="submit_tip"></span></td>
+    </tr>
+</tbody>
+</table>
+</form>

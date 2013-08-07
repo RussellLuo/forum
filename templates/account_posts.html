@@ -7,11 +7,13 @@ $def with (posts)
     <tr>
         <th id="title">标题</th>
         <th id="time">发布时间</th>
+        <th id="edit">操作</th>
         <th id="del">操作</th>
 $for p in posts:
     <tr>
         <td title="$p['title']"><a href="/view/$p['id']">$trim_utf8(p['title'], 25)</a></td>
         <td>$p['time']</td>
+        <td><a href="/edit/$p['id']">编辑</a></td>
         <td><a href="/del/$p['id']">删除</a></td>
     </tr>
 </tbody>

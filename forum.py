@@ -14,6 +14,7 @@ sys.setdefaultencoding('utf-8')
 urls = (
   '/', 'Index',
   '/add', 'Add',
+  '/edit/(\d+)', 'Edit',
   '/del/(\d+)', 'Del',
   '/view/(\d+)', 'View',
   '/register', 'Register',
@@ -67,7 +68,28 @@ class Add:
         if post_id:
             raise web.seeother("/view/%d" % post_id)
         else:
+            return titled_render().failed('你不应该到达这里')
+
+class Edit:
+    def GET(self, post_id):
+        post_id = int(post_id)
+        cur_user_id = model.User().current_id()
+        post = model.Post().view(post_id)
+        # 只有作者（已登录）才能编辑自己的文章
+        if post and post['user_id'] == cur_user_id:
+            return titled_render().edit(post)
+        elif cur_user_id: # 用户已登录，但不是作者
+            return titled_render().failed('操作受限，你无权编辑其他人的文章')
+        else: # 用户未登录
             return titled_render().failed('操作受限，请先<a href="/login">登录</a>')
+
+    def POST(self, post_id):
+        i = web.input(title='', content='')
+        post_id = int(post_id)
+        if model.Post().update(post_id, i.title, i.content):
+            raise web.seeother("/view/%d" % post_id)
+        else:
+            return titled_render().failed('你不应该到达这里')
 
 class Del:
     def GET(self, post_id):
@@ -81,7 +103,7 @@ class Del:
             model.Post().ddel(post_id)
             raise web.seeother('/account/posts')
         elif cur_user_id: # 用户已登录，但不是作者
-            return titled_render().failed('操作受限，请访问其他页面')
+            return titled_render().failed('操作受限，你无权删除其他人的文章')
         else: # 用户未登录
             return titled_render().failed('操作受限，请先<a href="/login">登录</a>')
 

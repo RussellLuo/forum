@@ -97,6 +97,14 @@ class Post:
         else:
             return 0
 
+    def update(self, id, title, content):
+        try:
+            db.update('posts', where='id=$id', title=title, content=content, vars=locals())
+            return True
+        except Exception, e:
+            print e
+            return False
+
     def view(self, id):
         '''获取id对应的文章'''
         posts = db.query('''SELECT posts.id, title, content, posts.time, user_id, users.name AS username, users.picture AS user_face

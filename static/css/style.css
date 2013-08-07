@@ -413,8 +413,12 @@ table#account_posts th#time {
     width: 200px;
 }
 
+table#account_posts th#edit {
+    width: 80px;
+}
+
 table#account_posts th#del {
-    width: 50px;
+    width: 80px;
 }
 
 table#account_posts td {
