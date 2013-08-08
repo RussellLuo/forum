@@ -372,6 +372,10 @@ div#view_post div.quote {
     border: 1px solid #ccc;
 }
 
+div#view_post div.body {
+    line-height: 28px;
+}
+
 form#new_comment {
     margin-top: 20px;
     padding-top: 20px;
